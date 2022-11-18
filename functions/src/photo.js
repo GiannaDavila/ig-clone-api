@@ -1,8 +1,9 @@
 import { FieldValue } from "firebase-admin/firestore";
 import dbConnect from "./dbConnect.js";
+
 export async function getAllPhotos (req,res){
     const db = dbConnect();
-    const collection = await db.collection('photos') .get()
+    const collection = await db.collection('photos').get()
     .catch (err => res.status(500).send(err))
     const photos = collection.docs.map(doc => ({...doc.data(), photoId: doc.id}));//1.info in the data 3. the random number id name 2.name for this 
     res.send(photos);
